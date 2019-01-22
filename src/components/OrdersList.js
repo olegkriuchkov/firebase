@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow';
+import firebase from 'firebase';
 
 const tableHeaders = [
     '#', 
@@ -33,7 +34,20 @@ class OrdersList extends Component {
         this.setState({
             ordersList: ordersList
         });
-        console.log(i);
+    }
+    componentDidMount() {
+        var config = {
+            apiKey: "AIzaSyBP48W31HLmu-dh0EGmhjpBd8sVMrHPVYM",
+            authDomain: "smiss-firebase-oleg.firebaseapp.com",
+            databaseURL: "https://smiss-firebase-oleg.firebaseio.com",
+            projectId: "smiss-firebase-oleg",
+            storageBucket: "smiss-firebase-oleg.appspot.com",
+            messagingSenderId: "478421274522"
+          };
+        firebase.initializeApp(config);
+        firebase.database().ref('orders').once('value').then((data)=>{
+            console.log(data);
+        })
     }
     render() {
         return (

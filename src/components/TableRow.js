@@ -4,10 +4,8 @@ class TableRow extends Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         const {order, deleteOrder, rowNumber} = this.props;
-        console.log(this.props);
         return (
             <tr>
                 <td>{order.ordNum}</td>

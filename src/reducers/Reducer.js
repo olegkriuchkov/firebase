@@ -11,8 +11,11 @@ function Reducer(state=initialState, action) {
         case "EDIT_ORDER": {
             return {};
         }
-        default :
-        return {...state};
+        case "DELETE_ORDER": {
+            return {};
+        }
+        default:
+            return {...state};
     }
 }
 
