@@ -35,20 +35,6 @@ class OrdersList extends Component {
             ordersList: ordersList
         });
     }
-    componentDidMount() {
-        var config = {
-            apiKey: "AIzaSyBP48W31HLmu-dh0EGmhjpBd8sVMrHPVYM",
-            authDomain: "smiss-firebase-oleg.firebaseapp.com",
-            databaseURL: "https://smiss-firebase-oleg.firebaseio.com",
-            projectId: "smiss-firebase-oleg",
-            storageBucket: "smiss-firebase-oleg.appspot.com",
-            messagingSenderId: "478421274522"
-          };
-        firebase.initializeApp(config);
-        firebase.database().ref('orders').once('value').then((data)=>{
-            console.log(data);
-        })
-    }
     render() {
         return (
             <div>
