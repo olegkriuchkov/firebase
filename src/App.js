@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from "react-redux";
 import {init as firebaseInit} from './javascripts/firebase';
+import { connect } from 'react-redux';
 
 import MainPage from './components/MainPage';
 import OrdersList from './components/OrdersList';
 import OrderCreate from './components/OrderCreate';
-import store from './store';
 
-import {getOrders} from './javascripts/firebase';
+import {getOrders} from './actions/actions';
 
 firebaseInit();
-getOrders();
+
+const mapStateToProps = (state) => {
+  return {...state};
+};
+
+const mapDispatchToProps = {
+  getOrders
+};
+
 class App extends Component {
+  componentDidMount() {
+    const {getOrders} = this.props;
+    // getOrders();
+  }
   render() {
     return (
-      <Provider store={store}>
         <Router>
             <div>
                 <Route path='/' component={MainPage}/>
@@ -23,9 +33,8 @@ class App extends Component {
                 <Route path='/ordercreate' component={OrderCreate}/>
             </div>
         </Router>
-      </Provider>
     );
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

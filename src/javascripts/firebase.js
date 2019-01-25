@@ -16,11 +16,13 @@ export const init = () => {
 }
 
 export const getOrders = () => {
-    database.ref('/orders').on('value',(snap)=>{
-        console.log(snap.val())
-    });
+    return database.ref('/orders').once('value').then(res => res.val());
 }
 
-export const createOrder = () => {
-    
+export const createOrder = (newOrder) => {
+    database.ref('/orders').push(newOrder);
+}
+
+export const deleteOrder = () => {
+    database.ref('/orders').remove()
 }

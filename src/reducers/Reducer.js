@@ -1,9 +1,14 @@
-const initialState = {};
+const initialState = {
+    orders: {},
+    inputValues: {},
+};
 
 function Reducer(state=initialState, action) {
     switch(action.type) {
         case "GET_ORDERS": {
-            return {};
+            return {
+                orders: action.orders
+            };
         }
         case "CREATE_ORDER": {
             return {};
@@ -13,6 +18,11 @@ function Reducer(state=initialState, action) {
         }
         case "DELETE_ORDER": {
             return {};
+        }
+        case "SET_INPUT_VALUES": {
+            return {
+                inputValues: action.inputValues
+            }
         }
         default:
             return {...state};

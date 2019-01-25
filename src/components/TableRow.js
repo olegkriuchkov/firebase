@@ -8,7 +8,7 @@ class TableRow extends Component {
         const {order, deleteOrder, rowNumber} = this.props;
         return (
             <tr>
-                <td>{order.ordNum}</td>
+                <td>{order.orderNum}</td>
                 <td>{order.username}</td>
                 <td>{order.description}</td>
                 <td>
@@ -19,8 +19,8 @@ class TableRow extends Component {
                         <option>Decline</option>
                     </select>
                 </td>
-                <td>{order.totPrice}</td>
-                <td>{order.purPrice}</td>
+                <td>{order.totalPrice}</td>
+                <td>{order.purchasePrice}</td>
                 <td>{order.address}</td>
                 <td>{order.createdAt}</td>
                 <td><button type="button" className="btn btn-outline-danger" onClick={() => deleteOrder(rowNumber)}>Delete order</button></td>

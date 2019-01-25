@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TableRow from './TableRow';
 import firebase from 'firebase';
+import lodash from 'lodash';
+
+import {getOrders} from '../actions/actions';
 
 const tableHeaders = [
     '#', 
@@ -14,28 +18,35 @@ const tableHeaders = [
     '',
 ];
 
-const ordersList = [
-    {ordNum: 1, username: 'oleg', description: 'asd asd asd', status: 'new', totPrice: 120, purPrice: 100, address: 'aaaa', createdAt: Date.now()},
-    {ordNum: 2, username: 'vlad', description: 'sdf sdf sdf', status: 'shipped', totPrice: 130, purPrice: 115, address: 'bbbb', createdAt: Date.now()},
-    {ordNum: 3, username: 'bogdan', description: 'rty rty try', status: 'declined', totPrice: 110, purPrice: 90, address: 'cccc', createdAt: Date.now()},
-    {ordNum: 4, username: 'ivan', description: 'hjk hjk hjk', status: 'accepted', totPrice: 155, purPrice: 120, address: 'dddd', createdAt: Date.now()},
-];
+const mapStateToProps = (state) => {
+    return {...state};
+  };
+  
+const mapDispatchToProps = {
+    getOrders
+};
 
 
 class OrdersList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ordersList: ordersList
+            
         }
     }
+    componentDidMount() {
+        const {getOrders} = this.props;
+        getOrders();
+    }
     deleteOrder = (i) => {
-        ordersList.splice(i,1);
-        this.setState({
-            ordersList: ordersList
-        });
+        // ordersList.splice(i,1);
+        // this.setState({
+        //     ordersList: ordersList
+        // });
     }
     render() {
+        console.log("Orders List: ", this.props);
+        const {orders} = this.props;
         return (
             <div>
                 <table className="table table-hover table-dark">
@@ -49,7 +60,7 @@ class OrdersList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {ordersList.map((order, i) => {
+                        {lodash.map(orders, (order, i) => {
                             return (
                                 <TableRow order={order} key={i} deleteOrder={this.deleteOrder} rowNumber={i}/>
                             )
@@ -62,4 +73,4 @@ class OrdersList extends Component {
     }
 }
 
-export default OrdersList;
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersList);
